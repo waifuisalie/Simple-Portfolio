@@ -2,6 +2,11 @@
 #include <stdlib.h>
 #include <string.h>
 
+// ANSI color escape codes
+#define ANSI_COLOR_RESET   "\x1b[0m"
+#define ANSI_COLOR_GREEN   "\x1b[32m"
+#define ANSI_COLOR_RED     "\x1b[31m"
+
 void display_menu() {
     printf("\n------ MENU ------\n");
     printf("1. Add Allocation\n");
@@ -73,8 +78,8 @@ int main() {
                     money_left = money_reserve(sum_of_all_allocations, income);
                     
                     if (temp_portfolio_allocation > money_left) {
-                        printf("You don't have enough money for that allocation!\n");
-                        printf("You have left %.2f\n", money_left);
+                        printf(ANSI_COLOR_RED "You don't have enough money for that allocation!\n" ANSI_COLOR_RESET);
+                        printf("You have left: " ANSI_COLOR_GREEN"%.2f" ANSI_COLOR_RESET "\n", money_left);
                         money_reserve_flag = 1; // set flag to 1 (keep asking for a sucessful allocation)
                     } else {
                         portfolio[count-1].allocation = temp_portfolio_allocation;
@@ -93,11 +98,12 @@ int main() {
                 break;
             case 2: // loop through every allocation 
                 for (int i = 0; i < count; i++) { 
-                    printf("You allocated %.2f (%.2f%%) of %.2f to %s\n", portfolio[i].allocation, portfolio[i].percentage_of_income, income, portfolio[i].name_allocation);}    
+                   printf("You allocated %.2f " ANSI_COLOR_GREEN "(%.2f%%)" ANSI_COLOR_RESET " of %.2f to %s\n", portfolio[i].allocation, portfolio[i].percentage_of_income, income, portfolio[i].name_allocation);
+                    }   
                 break;
             case 3: // show money that is left
                 money_left = money_reserve(sum_of_all_allocations, income);
-                printf("You still have %.2f to spend", money_left);
+                printf("You still have " ANSI_COLOR_GREEN "%.2f" ANSI_COLOR_RESET " to spend", money_left);
                 break;
             case 4:
                 printf("Exiting the program\n");
