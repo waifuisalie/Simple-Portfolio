@@ -73,7 +73,7 @@ int main() {
                     money_left = money_reserve(sum_of_all_allocations, income);
                     
                     if (temp_portfolio_allocation > money_left) {
-                        printf("You don't have enough money to do that allocation!\n");
+                        printf("You don't have enough money for that allocation!\n");
                         printf("You have left %.2f\n", money_left);
                         money_reserve_flag = 1; // set flag to 1 (keep asking for a sucessful allocation)
                     } else {
@@ -85,7 +85,7 @@ int main() {
 
                 money_left = money_reserve(sum_of_all_allocations, income);
         
-                printf("Allocating to what exactly? \n");
+                printf("Name of allocation: \n");
                 scanf(" %[^\n]", &portfolio[count-1].name_allocation); //count 
 
                 portfolio[count-1].percentage_of_income = calc_percent_inc(income, portfolio[count-1].allocation); // note that count - 1 bc we start with count++, so to get every index we do count - 1
